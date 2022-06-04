@@ -1,0 +1,23 @@
+
+.product h4{
+    color:black;
+}
+
+.product{
+    border: 1px solid grey;
+    display: inline-block;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+    box-shadow: 5px 5px 5px grey; 
+}
+
+.product label{
+    display: inline-block;
+    padding: 5px; 
+}
+
+.product .productImg{
+    width: 250px;
+    height: 250px;
+}
