@@ -24,8 +24,10 @@ const Product = (props) => {// console.log('the parameter value is: '+String(pro
     return (<div className='product'>
             <img className='productImg' src={'/img/'+props.data.image} />
             <h4>{props.data.title}</h4>
-            <label > Price: ${props.data.price}</label>
-            <label > Total: ${getTotal()}</label>
+            <div>
+                <label className='total' > Total: ${getTotal()}</label>
+                <label > Price: ${props.data.price}</label>
+            </div>
             <QuantityPicker onChange={onQuantityChange}></QuantityPicker>
             <button className="btn btn-outline-success btn-sm
 ">Add</button>    

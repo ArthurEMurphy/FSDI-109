@@ -1,6 +1,13 @@
 
 .catalog h2{
-    color: darkviolet;
-    
-
+    color:rgb(0, 0, 0); 
+    padding-top: 20px;
+    margin-bottom: 5px;
 }
+
+.catalog h3{
+    color:rgb(11, 111, 148);
+    font-size: 22px;
+    
+}
+
