@@ -10,7 +10,7 @@ import StoreContext from "../context/storeContext";
 const Product = (props) => {
   // console.log('the parameter value is: '+String(props.title));
   let [quantity, setQuantity] = useState(1);
-  let addProdToCart = useContext(StoreContext).addProductToCart;
+  let addProdToCart = useContext(StoreContext).addProdToCart;
 
   let onQuantityChange = (value) => {
     //use the value to update the quantity
