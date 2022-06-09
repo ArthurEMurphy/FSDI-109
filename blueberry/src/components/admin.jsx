@@ -5,7 +5,7 @@ const Admin = () => {
   const [product, setProduct] = useState({});
   const [coupon, setCoupon] = useState({});
   const [allCoupons, setAllCoupons] = useState([]);
-  const [allProducts, setAllProducts] = useSatet([]);
+  const [allProducts, setAllProducts] = useState([]);
 
   const saveProduct = () => {
     console.log("Saving Product", product);
@@ -22,15 +22,9 @@ const Admin = () => {
     let copy = { ...product };
     copy[name] = val;
     setProduct(copy);
-
-  }
+  };
 
      //TODO: send the product to
-  };
-
-  const saveCoupon = () => {
-    console.log("Saving Coupon", coupon);
-  };
 
   const couponChanged = (e) => {
     let name = e.target.name;
@@ -39,7 +33,14 @@ const Admin = () => {
     let copy = { ...coupon };
     copy[name] = val;
     setCoupon(copy);
+  };
 
+  const saveCoupon = () => {
+    console.log("Saving Coupon", coupon);
+    let copy = [...allCoupons];
+    copy.push(coupon);
+    setAllCoupons(copy);
+  
     // add the coupon to the allCoupons array
   };
 
