@@ -4,7 +4,15 @@ import { useContext } from 'react';
 import StoreContext from "../context/storeContext";
 
 function Navbar() {
-let cart = useContext(StoreContext).cart;
+  let cart = useContext(StoreContext).cart;
+
+  const getNumItems = () => {
+    let total = 0;
+    for(let i=0; i < cart.length; i++) {
+      total += cart[i].quantity;
+    };
+    return total;
+  };
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark">
@@ -54,13 +62,13 @@ let cart = useContext(StoreContext).cart;
 
           <form className="d-flex">
             <Link className="btn btn-outline-light" to="/cart">
-               {cart.length} View Cart
+               {getNumItems()} View Cart
               </Link>
           </form>
         </div>
       </div>
     </nav>
   );
-}
+};
 
 export default Navbar;

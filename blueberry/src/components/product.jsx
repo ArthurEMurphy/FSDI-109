@@ -32,14 +32,14 @@ const Product = (props) => {
 
   return (
     <div className="product">
-      <img className="productImg" src={"/img/" + props.data.image} />
+      <img className="productImg" src={"/img/" + props.data.image} alt="product" />
       <h4>{props.data.title}</h4>
-      <div>
+      <div className="prices">
         <label className="total"> Total: ${getTotal()}</label>
-        <label> Price: ${props.data.price}</label>
+        <label> Price: ${props.data.price.toFixed(2)}</label>
       </div>
       <QuantityPicker onChange={onQuantityChange}></QuantityPicker>
-      <button onClick="add Product" className="btn btn-outline-success btn-sm">
+      <button onClick={addProduct} className="btn btn-danger btn-sm">
         Add
       </button>
     </div>
