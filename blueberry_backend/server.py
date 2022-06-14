@@ -57,10 +57,14 @@ def save_product():
 
 @app.route("/api/catalog/count", methods=["GET"])
 def get_count():
+    cursor = db.products.find({})
+    num_items = 0
+    for prod in cursor:
+        num_items += 1
     # Here... count how many products are in the list catalog
-    counts = len(catalog)
+    # counts = len(catalog)
 
-    return json.dumps(counts)  # return the value
+    return json.dumps(num_items)  # return the value
 
 # Request 127.0.0.1:5000/api/product/5f40a6baac77a903d8f682c6
 
@@ -86,10 +90,10 @@ def get_product(id):
 # @app.route("/api/catalog/total", methods=["GET"])
 @app.get('/api/catalog/total')
 def get_total():
+    cursor = db.products.find({})
     total = 0
-    for prod in catalog:
-        #total = total + prod["price"]
-        total += prod["price"]
+    for prod in cursor:
+        total += prod["price"]#total = total + prod["price"]
     return json.dumps(total)
 
 
@@ -112,22 +116,27 @@ def products_by_category(category):
 
 @app.get('/api/categories')
 def get_unique_categories():
+    cursor = db.products.find({})
     results = []
-    for prod in catalog:
+    for prod in cursor:
         cat = prod['category']
         # if cat does not exist in results, then
         if not cat in results:
             results.append(cat)
+    
     return json.dumps(results)
 
 
 # get the cheapest product
 @app.get('/api/products/cheapest')
 def get_cheapest_product():
-    solution = catalog[0]
-    for prod in catalog:
+    cursor = db.products.find({})
+    solution = cursor[0]
+    
+    for prod in cursor:
         if prod['price'] < solution['price']:
             solution = prod
+    solution["_id"] = str(solution["_id"])
     return json.dumps(solution)
 
 
