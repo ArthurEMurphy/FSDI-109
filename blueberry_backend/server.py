@@ -33,16 +33,22 @@ def address():
 
 @app.route("/api/catalog", methods=["GET"])
 def get_catalog():
-    return json.dumps(catalog)
+    results = []
+    cursor = db.products.find({}) # get all data from the collection
+
+    for prod in cursor:
+        prod["_id"] = str(prod["_id"])
+        results.append(prod)
+
+    return json.dumps(results)
 
 # POST Method to create new products
 @app.route("/api/catalog", methods=["POST"])
 def save_product():
     product = request.get_json()
-    
-    db.products.inseet_one(product)
+    db.products.insert_one(product)
 
-    print(product)
+    product["_id"] = str(product["_id"])
 
     return json.dumps(product)
 
