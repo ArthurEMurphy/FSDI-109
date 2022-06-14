@@ -33,6 +33,9 @@ def address():
 def get_catalog():
     return json.dumps(catalog)
 
+# POST Method to create new products
+
+
 # make an endpoint to send back how mant product do we have in the catalog
 
 
