@@ -1,9 +1,11 @@
 from email.mime import application
 import json
 from pickle import APPEND
-from flask import Flask, abort  # Django
+from flask import Flask, abort, request  # Django
 from about_me import me
 from mock_data import catalog  # IMPORTANT STEP
+from config import db
+from bson import ObjectId
 
 app = Flask('blueberry')
 
@@ -34,7 +36,15 @@ def get_catalog():
     return json.dumps(catalog)
 
 # POST Method to create new products
+@app.route("/api/catalog", methods=["POST"])
+def save_product():
+    product = request.get_json()
+    
+    db.products.inseet_one(product)
 
+    print(product)
+
+    return json.dumps(product)
 
 # make an endpoint to send back how mant product do we have in the catalog
 
