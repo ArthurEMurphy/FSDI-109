@@ -174,22 +174,37 @@ def get_exe1():
 
 ################################################## COUPON CODES ########################################################
 # get all
-@app.get("./api/coupons")
-def get_coupon():
-    results = []
+@app.route("/api/coupons", methods=["GET"])
+def get_all_coupons():
     cursor = db.coupons.find({})
-    return json.dumps(results)
-# save coupin codes
-@app.post("./api/coupons")
-def save_coupon():
     results = []
-    db.coupons.insert_one(results)
+    for cc in cursor:
+        cc["_id"] = str(cc["_id"])
+        results.append(cc)
+
+    return json.dumps(results)
+
+# save coupon codes
+@app.route("/api/coupons", methods=["post"])
+def save_coupon():
+    coupon = request.get_json()
+
+    # validations
+
+    db.coupons.insert_one(coupon)
+
+    coupon["_id"] = str(coupon["_id"])
+    return json.dumps(coupon)
 
 # get CC by code
-@app.get("./api/coupons")
-def get_coupon_by_Code():
+@app.route("/api/coupons", methods=["GET"])
+def get_coupon_by_Code(coupons):
     results = []
-    cursor = db.coupons.find({})
+    cursor = db.coupons.find({"cc": coupons})
+    for cc in cursor:
+        cc["_id"] = str(cc["_id"])
+        results.append(cc)
+
     return json.dumps(results)
 
 app.run(debug=True)
