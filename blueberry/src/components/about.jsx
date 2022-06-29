@@ -1,5 +1,5 @@
 import "./about.css";
-import { useState } from "react";
+import React, { useState } from "react";
 
 const About = () => {
   const [visible, setVisible] = useState(false);
